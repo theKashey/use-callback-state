@@ -1,6 +1,6 @@
 {
   "name": "use-callback-state",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "description": "use State, but it will callback",
   "main": "dist/es5/index.js",
   "author": "Anton Korzunov <thekashey@gmail.com>",

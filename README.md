@@ -89,6 +89,9 @@ return (
 );
 ```
 
+# See also
+- [use-callback-ref](https://github.com/theKashey/use-callback-ref) - the same `useRef` but it will callback.
+
 # License
 
 MIT

@@ -3,10 +3,10 @@
   "version": "1.0.0",
   "description": "use State, but it will callback",
   "main": "dist/es5/index.js",
-  "author": "Anton Korzunov <thekashey@gmail.com>",
-  "license": "MIT",
   "module": "dist/es2015/index.js",
   "types": "dist/es5/index.d.ts",
+  "author": "Anton Korzunov <thekashey@gmail.com>",
+  "license": "MIT",
   "engines": {
     "node": ">=10"
   },
@@ -65,7 +65,7 @@
     "singleQuote": true
   },
   "dependencies": {
-    "tslib": "^1.9.3"
+    "tslib": "^1.9.3 || ^2.0.0"
   },
   "devDependencies": {
     "@size-limit/preset-small-lib": "^2.1.6",

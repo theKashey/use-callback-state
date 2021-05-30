@@ -21,6 +21,13 @@
 
 `useState` is about storing a variable, and changing it. However what if not everything could be set, and what if you have to react on state change?
 
+## Why?
+- to react on state change in the __same tick__, not __after__ as usual, causing potential state tearing and inconsistency.
+- for input value validation or transformation
+
+## useReducer
+- useCallbackState is quite similar to `useReducer`, it recieves the old `state` and the `new`, producing the `result`. Use reducer does the same, and `action` could be action. However, you can't replace reducer, while `callback` in `useCallbackStart` would always refer to a latest version. 
+
 ## Control
 
 For state validation
@@ -88,6 +95,9 @@ return (
   </>
 );
 ```
+
+# See also
+- [use-callback-ref](https://github.com/theKashey/use-callback-ref) - the same `useRef` but it will callback.
 
 # License
 

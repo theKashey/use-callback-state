@@ -1,8 +1,9 @@
 import { act, renderHook } from '@testing-library/react-hooks';
 
+import { ChangeEvent } from 'react';
 import { useCallbackState } from '../src';
 
-describe('Does nothing', () => {
+describe('Direct state', () => {
   it('Controls the state', () => {
     const spy = jest.fn();
     const { result } = renderHook(() =>
@@ -65,5 +66,36 @@ describe('Does nothing', () => {
     cb = (newState: number) => newState + 1;
     act(() => result.current[1](10));
     expect(result.current[0]).toBe(11);
+  });
+});
+
+describe('Indirect state', () => {
+  it('number to string', () => {
+    const spy = jest.fn();
+    const { result } = renderHook(() =>
+      useCallbackState('-', (newState: number, oldState) => {
+        spy(newState, oldState);
+        return oldState + String(newState);
+      })
+    );
+
+    expect(result.current[0]).toBe('-');
+    expect(spy).not.toHaveBeenCalled();
+
+    act(() => result.current[1](1));
+
+    expect(result.current[0]).toBe('-1');
+    expect(spy).toHaveBeenCalledWith(1, '-');
+  });
+
+  it('should not fail TS', () => {
+    renderHook(() =>
+      useCallbackState('-', (event: ChangeEvent<HTMLInputElement>) => {
+        return event.target.value;
+      })
+    );
+
+    // we are checking TS
+    expect(1).toBe(1);
   });
 });

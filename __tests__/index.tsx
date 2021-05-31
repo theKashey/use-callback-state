@@ -20,6 +20,8 @@ describe('Direct state', () => {
 
     expect(result.current[0]).toBe(11);
     expect(spy).toHaveBeenCalledWith(10, 42);
+
+    act(() => result.current[1](10, true));
   });
 
   it('Even Odd', () => {
@@ -86,6 +88,10 @@ describe('Indirect state', () => {
 
     expect(result.current[0]).toBe('-1');
     expect(spy).toHaveBeenCalledWith(1, '-');
+
+    act(() => result.current[1](1, false));
+    // @-ts-expect-error
+    // act(() => result.current[1](1, true));
   });
 
   it('should not fail TS', () => {

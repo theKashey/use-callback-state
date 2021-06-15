@@ -56,7 +56,7 @@ For form values management
 
 ```js
 import { useCallbackState } from 'use-callback-state';
-const [value, setValue] = useCallbackState('John Doe', event => event.target.current);
+const [value, setValue, forceSetValue] = useCallbackState('John Doe', event => event.target.current);
 return <input value={value} onChange={setValue} />;
 ```
 

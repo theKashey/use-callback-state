@@ -5,6 +5,7 @@ type IndirectDispatch<ReadState, WriteState> = (
   force?: false
 ) => void;
 type DirectDispatch<ReadState> = (value: ReadState | ((old: ReadState) => ReadState), force?: true) => void;
+type ForceDispatch<ReadState> = (value: ReadState | ((old: ReadState) => ReadState)) => void;
 
 type Dispatch<ReadState, WriteState> = WriteState extends ReadState
   ? DirectDispatch<ReadState>
@@ -47,7 +48,7 @@ export function useCallbackState<ReadState, WriteState = ReadState>(
     incomingValue: WriteState,
     storedValue: ReadState
   ) => WriteState extends ReadState ? ReadState | undefined | void : ReadState
-): [ReadState, Dispatch<ReadState, WriteState>] {
+): [ReadState, Dispatch<ReadState, WriteState>, ForceDispatch<ReadState>] {
   const [state, setState] = useState(initialState);
   const callbackRef = useRef(changeCallback);
   callbackRef.current = changeCallback;
@@ -67,5 +68,5 @@ export function useCallbackState<ReadState, WriteState = ReadState>(
 
   useDebugValue(state);
 
-  return [state, updateState];
+  return [state, updateState, setState];
 }

@@ -89,9 +89,11 @@ describe('Indirect state', () => {
     expect(result.current[0]).toBe('-1');
     expect(spy).toHaveBeenCalledWith(1, '-');
 
-    act(() => result.current[1](1, false));
-    // @-ts-expect-error
-    // act(() => result.current[1](1, true));
+    act(() => result.current[1](0, false));
+    expect(result.current[0]).toBe('-10');
+    act(() => result.current[2]('-1'));
+
+    expect(result.current[0]).toBe('-1');
   });
 
   it('should not fail TS', () => {
